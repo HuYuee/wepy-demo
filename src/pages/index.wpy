@@ -16,10 +16,18 @@
 
 <template>
   <view class="container">
-    <view class="userinfo" @tap="handleViewTap">
-      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover" />
-      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
-    </view>
+    <!-- <view class="userinfo" @tap="handleViewTap">
+        <open-data type="userNickName"></open-data>
+        <open-data type="userAvatarUrl"></open-data>
+      </view> -->
+    <div class="weui-gallery">
+      <span class="weui-gallery__img" style="background-image: url(./images/pic_article.png);"></span>
+      <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+          <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+      </div>
+    </div>
     <panel>
       <view class="title" slot="title">测试数据绑定</view>
       <text class="info">{{normalTitle}}</text>
@@ -74,6 +82,7 @@
   import Group from '../components/group'
   import Toast from 'wepy-com-toast'
   import testMixin from '../mixins/test'
+  import testMixin from 'weui'
   console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
   export default class Index extends wepy.page {
     config = {

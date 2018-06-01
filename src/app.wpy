@@ -14,13 +14,32 @@
   import 'wepy-async-function';
   export default class extends wepy.app {
     config = {
-      pages: ['pages/index'],
+      pages: ['pages/index', 'pages/notice', 'pages/car', 'pages/info'],
       window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',
         navigationBarTitleText: 'WeChat',
         navigationBarTextStyle: 'black'
-      }
+      },
+      "tabBar": {
+        "list": [{
+            "pagePath": "pages/index",
+            "text": "首页"
+          },
+          {
+            "pagePath": "pages/notice",
+            "text": "公告"
+          },
+          {
+            "pagePath": "pages/car",
+            "text": "购物车"
+          },
+          {
+            "pagePath": "pages/info",
+            "text": "服务"
+          }
+        ]
+      },
     };
     globalData = {
       userInfo: null
@@ -42,18 +61,6 @@
     async testAsync() {
       const data = await this.sleep(3);
       console.log(data);
-    }
-    getUserInfo(cb) {
-      const that = this;
-      if (this.globalData.userInfo) {
-        return this.globalData.userInfo;
-      }
-      wepy.getUserInfo({
-        success(res) {
-          that.globalData.userInfo = res.userInfo;
-          cb && cb(res.userInfo);
-        }
-      });
     }
   }
 </script>

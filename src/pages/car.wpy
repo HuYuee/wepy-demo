@@ -1,0 +1,14 @@
+<style lang="less">
+  
+</style>
+
+<template>
+
+</template>
+
+<script>
+  
+  export default class Car extends wepy.page {
+    
+  }
+</script>

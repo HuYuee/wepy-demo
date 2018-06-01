@@ -52,6 +52,9 @@ if (prod) {
   // 压缩sass
   // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
+  // 压缩less
+  module.exports.compilers['less'] = {'compress': true};
+
   // 压缩js
   module.exports.plugins = {
     uglifyjs: {
