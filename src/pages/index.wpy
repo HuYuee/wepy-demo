@@ -82,7 +82,6 @@
   import Group from '../components/group'
   import Toast from 'wepy-com-toast'
   import testMixin from '../mixins/test'
-  import testMixin from 'weui'
   console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
   export default class Index extends wepy.page {
     config = {
