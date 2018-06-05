@@ -1,5 +1,5 @@
 <style lang="less">
-  
+
 </style>
 
 <template>
@@ -7,8 +7,7 @@
 </template>
 
 <script>
-  
+  import wepy from 'wepy'
   export default class Notice extends wepy.page {
-    
   }
 </script>

@@ -56,7 +56,7 @@
                 // background: black;
             }
         }
-        .weui-search-bar__form-panel {
+        .weui-search-panel {
             // position:relative;
             // -webkit-box-flex:1;
             // -webkit-flex:auto;
@@ -106,12 +106,12 @@
             <view class="weui-search-bar">
                 <view class="weui-search-bar__form">
                     <label class="weui-search-bar__label" hidden="{{inputShowed}}" @tap="showInput">
-                                            <icon class="weui-icon-search" type="search" size="14"></icon>
-                                            <view class="weui-search-bar__text">搜索</view>
-                                        </label>
+                                                <icon class="weui-icon-search" type="search" size="14"></icon>
+                                                <view class="weui-search-bar__text">搜索</view>
+                                            </label>
                 </view>
             </view>
-            <view class="weui-search-bar__form-panel" hidden="{{!inputShowed}}">
+            <view class="weui-search-panel" hidden="{{!inputShowed}}">
                 <view class="weui-search-bar">
                     <view class="weui-search-bar__form">
                         <view class="weui-search-bar__box">
@@ -147,15 +147,15 @@
                     </navigator>
                 </view>
             </view>
-            <view class="page-grid">
-                <view class="weui-grids">
-                    <block wx:for="{{grids}}" wx:key="*this">
-                        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-                            <image class="weui-grid__icon" src="../images/icon_tabbar.png" />
-                            <view class="weui-grid__label">Grid</view>
-                        </navigator>
-                    </block>
-                </view>
+        </view>
+        <view class="page-grid">
+            <view class="weui-grids">
+                <block wx:for="{{grids}}" wx:key="*this">
+                    <navigator url="./search" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../images/icon_tabbar.png" />
+                        <view class="weui-grid__label">Grid</view>
+                    </navigator>
+                </block>
             </view>
         </view>
     </view>

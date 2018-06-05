@@ -23,7 +23,7 @@ import wepy from 'wepy';
 import 'wepy-async-function';
 export default class extends wepy.app {
   config = {
-    pages: ['pages/car', 'pages/index', 'pages/notice', 'pages/info'],
+    pages: ['pages/car', 'pages/index', 'pages/notice', 'pages/info', 'pages/search'],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
