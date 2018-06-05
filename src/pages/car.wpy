@@ -1,13 +1,13 @@
 <style lang="less">
-    .page-section{
+    .page-section {
         .swiper-item {
             display: block;
             height: 150px;
         }
         .demo-text-1 {
             position: relative;
-            background-color: #1AAD19;
-            color: #FFFFFF;
+            background-color: white;
+            color: #ffffff;
             font-size: 36rpx;
         }
         .demo-text-1:before {
@@ -19,8 +19,8 @@
         }
         .demo-text-2 {
             position: relative;
-            background-color: #2782D7;
-            color: #FFFFFF;
+            background-color: white;
+            color: #ffffff;
             font-size: 36rpx;
         }
         .demo-text-2:before {
@@ -32,7 +32,7 @@
         }
         .demo-text-3 {
             position: relative;
-            background-color: #F1F1F1;
+            background-color: #f1f1f1;
             color: #353535;
             font-size: 36rpx;
         }
@@ -44,8 +44,48 @@
             transform: translate(-50%, -50%);
         }
     }
-    .page-grid{
-        .weui-grid{
+    .page-search {
+        .weui-search-bar__form {
+            height: 30px;
+            .weui-search-bar__box {
+                // position: fixed;
+                // top: 0;
+                // left: 0;
+                // width: 100%;
+                // height: 100%;
+                // background: black;
+            }
+        }
+        .weui-search-bar__form-panel {
+            // position:relative;
+            // -webkit-box-flex:1;
+            // -webkit-flex:auto;
+            // flex:auto;
+            // border-radius:5px;
+            // background:#FFFFFF;
+            // border:1rpx solid #E6E6EA;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            .weui-search-bar__cancel-btn {
+                // position: absolute;
+                // right: 0;
+                // top: 2;
+                // width: 81px;
+                // height: 20px;
+                font-size: 16px;
+            }
+            .searchbar-result {
+                margin-top: 0;
+            }
+        }
+    }
+    .page-grid {
+        .weui-grid {
             width: 25%;
         }
     }
@@ -65,51 +105,57 @@
         <view class="page-search">
             <view class="weui-search-bar">
                 <view class="weui-search-bar__form">
-                    <view class="weui-search-bar__box">
-                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-                        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" @tap="clearInput">
-                            <icon type="clear" size="14"></icon>
+                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" @tap="showInput">
+                                            <icon class="weui-icon-search" type="search" size="14"></icon>
+                                            <view class="weui-search-bar__text">搜索</view>
+                                        </label>
+                </view>
+            </view>
+            <view class="weui-search-bar__form-panel" hidden="{{!inputShowed}}">
+                <view class="weui-search-bar">
+                    <view class="weui-search-bar__form">
+                        <view class="weui-search-bar__box">
+                            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                                <icon type="clear" size="14"></icon>
+                            </view>
                         </view>
                     </view>
-                    <label class="weui-search-bar__label" hidden="{{inputShowed}}" @tap="showInput">
-                        <icon class="weui-icon-search" type="search" size="14"></icon>
-                        <view class="weui-search-bar__text">搜索</view>
-                    </label>
+                    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
                 </view>
-                <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" @tap="hideInput">取消</view>
-            </view>
-            <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                    <view class="weui-cell__bd">
-                        <view>实时搜索文本</view>
-                    </view>
-                </navigator>
-            </view>
-        </view>
-        <view class="page-grid">
-            <view class="weui-grids">
-                <block wx:for="{{grids}}" wx:key="*this">
-                    <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-                        <image class="weui-grid__icon" src="../images/icon_tabbar.png" />
-                        <view class="weui-grid__label">Grid</view>
+                <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+                    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd">
+                            <view>实时搜索文本</view>
+                        </view>
                     </navigator>
-                </block>
+                    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd">
+                            <view>实时搜索文本</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd">
+                            <view>实时搜索文本</view>
+                        </view>
+                    </navigator>
+                    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd">
+                            <view>实时搜索文本</view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class="page-grid">
+                <view class="weui-grids">
+                    <block wx:for="{{grids}}" wx:key="*this">
+                        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../images/icon_tabbar.png" />
+                            <view class="weui-grid__label">Grid</view>
+                        </navigator>
+                    </block>
+                </view>
             </view>
         </view>
     </view>
@@ -121,9 +167,9 @@
         data = {
             background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
             inputShowed: false,
-            inputVal: "",
+            inputVal: '',
             grids: [0, 1, 2, 3, 4, 5, 6, 7]
-        }
+        };
         methods = {
             showInput() {
                 this.inputShowed = true;
@@ -138,6 +184,6 @@
             inputTyping(e) {
                 this.inputVal = e.detail.value;
             }
-        }
+        };
     }
 </script>
