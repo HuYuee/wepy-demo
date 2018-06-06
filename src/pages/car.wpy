@@ -93,6 +93,11 @@
 
 <template>
     <view>
+        <view>
+            <button open-type="getUserInfo" bindgetuserinfo='Tap'>点我登录</button>
+            <open-data type="userAvatarUrl"></open-data>
+            <open-data type="userNickName"></open-data>
+        </view>
         <view class="page-section page-section-spacing swiper">
             <swiper indicator-dots="true" autoplay="true" circular="true" vertical="" interval="5000" duration="500" previous-margin="0px" next-margin="0px">
                 <block wx:for="{{background}}" wx:key="*this">
@@ -106,9 +111,9 @@
             <view class="weui-search-bar">
                 <view class="weui-search-bar__form">
                     <label class="weui-search-bar__label" hidden="{{inputShowed}}" @tap="showInput">
-                                                <icon class="weui-icon-search" type="search" size="14"></icon>
-                                                <view class="weui-search-bar__text">搜索</view>
-                                            </label>
+                        <icon class="weui-icon-search" type="search" size="14"></icon>
+                        <view class="weui-search-bar__text">搜索</view>
+                    </label>
                 </view>
             </view>
             <view class="weui-search-panel" hidden="{{!inputShowed}}">
@@ -185,5 +190,8 @@
                 this.inputVal = e.detail.value;
             }
         };
+        Tap(res) {
+            console.log(res);
+        }
     }
 </script>

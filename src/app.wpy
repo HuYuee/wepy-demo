@@ -17,6 +17,13 @@
   box-sizing: border-box;
 }
 </style>
+<template>
+<view>
+ <button open-type="getUserInfo"></button>
+  <open-data type="userAvatarUrl"></open-data>
+</view>
+ 
+</template>
 
 <script>
 import wepy from 'wepy';
@@ -60,6 +67,43 @@ export default class extends wepy.app {
     this.use('requestfix');
   }
   onLaunch() {
+    wx.login({
+      success: function(res) {
+        console.log(res)
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'https://test.com/onLogin',
+            data: {
+              code: res.code
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
+    console.log('1')
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+          if (!res.authSetting['scope.userInfo']) {
+              wx.authorize({
+                  scope: 'scope.userInfo',
+                  success() {
+                      // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+                      // wx.startRecord()
+                  }
+              })
+          }
+      },
+      error(){
+        console.log('error!')
+      },
+      complete(){
+        console.log('complete!')
+      }
+  })
     this.testAsync();
   }
   sleep(s) {
