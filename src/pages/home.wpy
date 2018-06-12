@@ -1,0 +1,210 @@
+<style lang="less">
+    .page-section {
+        .swiper-item {
+            display: block;
+            height: 150px;
+        }
+        .demo-text-1 {
+            position: relative;
+            background-color: white;
+            color: #ffffff;
+            font-size: 36rpx;
+        }
+        .demo-text-1:before {
+            content: 'A';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .demo-text-2 {
+            position: relative;
+            background-color: white;
+            color: #ffffff;
+            font-size: 36rpx;
+        }
+        .demo-text-2:before {
+            content: 'B';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .demo-text-3 {
+            position: relative;
+            background-color: #f1f1f1;
+            color: #353535;
+            font-size: 36rpx;
+        }
+        .demo-text-3:before {
+            content: 'C';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .page-search {
+        .weui-search-bar__form {
+            height: 30px;
+            .weui-search-bar__box {
+                // position: fixed;
+                // top: 0;
+                // left: 0;
+                // width: 100%;
+                // height: 100%;
+                // background: black;
+            }
+        }
+        .weui-search-panel {
+            // position:relative;
+            // -webkit-box-flex:1;
+            // -webkit-flex:auto;
+            // flex:auto;
+            // border-radius:5px;
+            // background:#FFFFFF;
+            // border:1rpx solid #E6E6EA;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            .weui-search-bar__cancel-btn {
+                // position: absolute;
+                // right: 0;
+                // top: 2;
+                // width: 81px;
+                // height: 20px;
+                font-size: 16px;
+            }
+            .searchbar-result {
+                margin-top: 0;
+            }
+        }
+    }
+    .page-grid {
+        .weui-grid {
+            width: 25%;
+        }
+    }
+</style>
+
+<template>
+    <form bindsubmit="formSubmit" report-submit="true" bindreset="formReset">
+        <!-- <view class="section section_gap">
+                <view class="section__title">switch</view>
+                <switch name="switch" />
+            </view>
+            <view class="section section_gap">
+                <view class="section__title">slider</view>
+                <slider name="slider" show-value></slider>
+            </view> -->
+        <view class="section">
+            <view class="section__title">input</view>
+            <input name="input" placeholder="please input here" />
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">radio</view>
+            <radio-group name="radio-group">
+                <label><radio value="radio1"/>radio1</label>
+                <label><radio value="radio2"/>radio2</label>
+            </radio-group>
+        </view>
+        <view class="section section_gap">
+            <view class="section__title">checkbox</view>
+            <checkbox-group name="checkbox">
+                <label><checkbox value="checkbox1"/>checkbox1</label>
+                <label><checkbox value="checkbox2"/>checkbox2</label>
+            </checkbox-group>
+        </view>
+        <view class="btn-area">
+            <button formType="submit">Submit</button>
+        </view>
+    </form>
+    <view>
+        <view class="page-section page-section-spacing swiper">
+            <view class="weui-article__h1">首页</view>
+            <navigator url="./car">点击跳转</navigator>
+            <button @tap="setStorage">点击存储数据</button>
+            <button @tap="getStorage">点击获取数据</button>
+        </view>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+    export default class Home extends wepy.page {
+        data = {
+            background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+            inputShowed: false,
+            inputVal: '',
+            grids: [0, 1, 2, 3, 4, 5, 6, 7]
+        };
+        methods = {
+            setStorage() {
+                try {
+                    wx.setStorageSync('name', 'huyue');
+                    wx.showModal({
+                        content: '数据存储成功！',
+                        showCancel: false,
+                        success: function(res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            }
+                        }
+                    });
+                    console.log('数据存储成功！')
+                } catch (e) {}
+            },
+            getStorage() {
+                try {
+                    var value = wx.getStorageSync('name')
+                    if (value) {
+                        wx.showModal({
+                            content: '获取到了姓名为：' + value,
+                            showCancel: false
+                        });
+                    } else {
+                        wx.showModal({
+                            content: '没有该数据',
+                            showCancel: false,
+                            success: function(res) {
+                                if (res.confirm) {
+                                    console.log('用户点击确定')
+                                }
+                            }
+                        });
+                        console.log('没有该数据')
+                    }
+                } catch (e) {
+                    // Do something when catch error
+                }
+            }
+        };
+        formSubmit(e) {
+            console.log('form发生了submit事件，携带数据为：', e.detail.formId)
+            wx.request({
+                url: 'https://api.weixin.qq.com/cgi-bin/token',
+                data: {
+                    grant_type: 'client_credential',
+                    appid: 'wxdcb72e9ff185298d',
+                    secret: '5cbc4619fe6ab4b92c94e6cfece50a06'
+                },
+                header: {
+                    'content-type': 'application/json' // 默认值
+                },
+                success: function(res) {
+                    console.log(res.data)
+                }
+            })
+        }
+        formReset() {
+            console.log('form发生了reset事件')
+        }
+        Tap(res) {
+            console.log(res);
+        }
+    }
+</script>

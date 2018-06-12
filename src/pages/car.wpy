@@ -93,10 +93,12 @@
 
 <template>
     <view>
+        <view><navigator open-type="switchTab" url="./info">点击跳转</navigator></view>
         <view>
             <button open-type="getUserInfo" bindgetuserinfo='Tap'>点我登录</button>
+            
             <open-data type="userAvatarUrl"></open-data>
-            <open-data type="userNickName"></open-data>
+            <!-- <open-data type="userNickName"></open-data> -->
         </view>
         <view class="page-section page-section-spacing swiper">
             <swiper indicator-dots="true" autoplay="true" circular="true" vertical="" interval="5000" duration="500" previous-margin="0px" next-margin="0px">
