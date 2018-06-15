@@ -1,0 +1,23 @@
+<style lang="less">
+</style>
+
+<template>
+<view>
+  <navigator url="./search">点击跳转</navigator>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class ReadHome extends wepy.page {
+    config = {
+      navigationBarTitleText: 'test'
+    }
+    data = {
+
+    }
+    methods = {
+      
+    }
+  }
+</script>

@@ -1,121 +1,65 @@
 <style lang="less">
-@import 'vendor/weui/weui.wxss';
-.button-sp-area{
+  @import 'vendor/weui/weui.wxss';
+  .button-sp-area {
     margin: 0 auto;
     padding-top: 15px;
     width: 60%;
-}
-.mini-btn{
+  }
+  .mini-btn {
     margin-right: 5px;
-}
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+  }
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
 </style>
 <template>
-<view>
- <button open-type="getUserInfo"></button>
-  <open-data type="userAvatarUrl"></open-data>
-</view>
- 
+  <view>
+    <button open-type="getUserInfo"></button>
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
 </template>
 
 <script>
-import wepy from 'wepy';
-import 'wepy-async-function';
-export default class extends wepy.app {
-  config = {
-    pages: ['pages/home', 'pages/car', 'pages/index', 'pages/notice', 'pages/info', 'pages/search'],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    },
-    tabBar: {
-      list: [
-        {
-          pagePath: 'pages/home',
-          text: '首页'
-        },
-        {
-          pagePath: 'pages/index',
-          text: '测试'
-        },
-        {
-          pagePath: 'pages/notice',
-          text: '公告'
-        },
-
-        {
-          pagePath: 'pages/info',
-          text: '服务'
-        }
-      ]
-    }
-  };
-  globalData = {
-    userInfo: null
-  };
-  constructor() {
-    super();
-    this.use('requestfix');
-  }
-  onLaunch() {
-    wx.login({
-      success: function(res) {
-        console.log(res)
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://test.com/onLogin',
-            data: {
-              code: res.code
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    });
-    console.log('1')
-    wx.getSetting({
-      success(res) {
-        console.log(res)
-          if (!res.authSetting['scope.userInfo']) {
-              wx.authorize({
-                  scope: 'scope.userInfo',
-                  success() {
-                      // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-                      // wx.startRecord()
-                  }
-              })
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+  export default class extends wepy.app {
+    config = {
+      pages: ['pages/InfoHome', 'pages/LessonHome', 'pages/read/home'],
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: 'WeChat',
+        navigationBarTextStyle: 'black'
+      },
+      tabBar: {
+        list: [{
+            pagePath: 'pages/InfoHome',
+            text: '课程'
+          },
+          {
+            pagePath: 'pages/LessonHome',
+            text: '同步读物'
+          },
+          {
+            pagePath: 'pages/read/home',
+            text: '我的'
           }
-      },
-      error(){
-        console.log('error!')
-      },
-      complete(){
-        console.log('complete!')
+        ]
       }
-  })
-    this.testAsync();
+    };
+    globalData = {
+      userInfo: null
+    };
+    constructor() {
+      super();
+    }
+    onLaunch() {
+      console.log(this)
+    }
   }
-  sleep(s) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('promise resolved');
-      }, s * 1000);
-    });
-  }
-  async testAsync() {
-    const data = await this.sleep(3);
-    console.log(data);
-  }
-}
 </script>
