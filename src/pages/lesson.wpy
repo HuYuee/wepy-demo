@@ -9,7 +9,7 @@
 
 <script>
   import wepy from 'wepy'
-  export default class LessonHome extends wepy.page {
+  export default class Lesson extends wepy.page {
     config = {
       navigationBarTitleText: 'test'
     }

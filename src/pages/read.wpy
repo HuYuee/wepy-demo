@@ -1,23 +1,23 @@
 <style lang="less">
+
 </style>
 
 <template>
-<view>
-  <navigator url="./search">点击跳转</navigator>
-</view>
+  <view>
+    <navigator url="./search">点击跳转</navigator>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  export default class ReadHome extends wepy.page {
+  console.log('11111')
+  export default class Read extends wepy.page {
     config = {
       navigationBarTitleText: 'test'
     }
     data = {
-
     }
     methods = {
-      
     }
   }
 </script>

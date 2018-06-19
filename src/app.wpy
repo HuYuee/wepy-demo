@@ -29,7 +29,7 @@
   import 'wepy-async-function';
   export default class extends wepy.app {
     config = {
-      pages: ['pages/InfoHome', 'pages/LessonHome', 'pages/read/home'],
+      pages: ['pages/car','pages/index','pages/info','pages/lesson', 'pages/read', 'pages/search'],
       window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',
@@ -38,15 +38,15 @@
       },
       tabBar: {
         list: [{
-            pagePath: 'pages/InfoHome',
+            pagePath: 'pages/car',
             text: '课程'
           },
           {
-            pagePath: 'pages/LessonHome',
+            pagePath: 'pages/index',
             text: '同步读物'
           },
           {
-            pagePath: 'pages/read/home',
+            pagePath: 'pages/info',
             text: '我的'
           }
         ]
