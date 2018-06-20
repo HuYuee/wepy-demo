@@ -53,7 +53,7 @@
   import wepy from 'wepy'
   export default class info extends wepy.page {
     config = {
-      navigationBarTitleText: '课程首页'
+      navigationBarTitleText: '个人中心'
     }
     data = {}
     methods = {}

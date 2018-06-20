@@ -1,5 +1,10 @@
 <style lang="less">
   @import 'vendor/weui/weui.wxss';
+  page {
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+  }
   .button-sp-area {
     margin: 0 auto;
     padding-top: 15px;
@@ -25,11 +30,11 @@
 </template>
 
 <script>
-  import wepy from 'wepy';
-  import 'wepy-async-function';
+  import wepy from 'wepy'
+  import 'wepy-async-function'
   export default class extends wepy.app {
     config = {
-      pages: ['pages/lesson','pages/index','pages/car','pages/info', 'pages/read', 'pages/search'],
+      pages: ['pages/lesson', 'pages/index', 'pages/car', 'pages/info', 'pages/read', 'pages/search'],
       window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',
@@ -51,10 +56,10 @@
           }
         ]
       }
-    };
+    }
     globalData = {
       userInfo: null
-    };
+    }
     constructor() {
       super();
     }

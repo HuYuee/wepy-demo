@@ -13,7 +13,7 @@
   console.log('11111')
   export default class Read extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '同步读物'
     }
     data = {
     }

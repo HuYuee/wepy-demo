@@ -1,23 +1,162 @@
 <style lang="less">
+  @backgound-block:#EBEBEB;
+  .lesson {
+    .page-section {
+      .swiper-item {
+        display: block;
+        height: 150px;
+      }
+      .demo-text-1 {
+        position: relative;
+        background-color: goldenrod;
+        color: #ffffff;
+        font-size: 36rpx;
+      }
+      .demo-text-1:before {
+        content: 'A';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .demo-text-2 {
+        position: relative;
+        background-color: blueviolet;
+        color: #ffffff;
+        font-size: 36rpx;
+      }
+      .demo-text-2:before {
+        content: 'B';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .demo-text-3 {
+        position: relative;
+        background-color: #f1f1f1;
+        color: #353535;
+        font-size: 36rpx;
+      }
+      .demo-text-3:before {
+        content: 'C';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .page__bd {
+      height: 100%;
+      padding-bottom: 0;
+      .weui-tab__panel {
+        .weui-tab__content {
+          text-align: center;
+          background: @backgound-block;
+          .weui-flex {
+            background: #F8F8F8;
+            .placeholder {
+              margin: 10px;
+              padding: 0 10px;
+              text-align: center;
+              background-color: @backgound-block;
+              height: 12em;
+              line-height: 12em;
+              color: #cfcfcf;
+              border-radius: 1em;
+            }
+          }
+          .weui-tab__block {
+            margin-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
 </style>
 
 <template>
-<view>
-  <navigator url="./search">点击跳转</navigator>
-</view>
+  <view class="lesson">
+    <view class="page-section page-section-spacing swiper">
+      <swiper indicator-dots="true" autoplay="true" circular="true" vertical="" interval="5000" duration="500" previous-margin="0px" next-margin="0px">
+        <block wx:for="{{imgs_array}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="page__bd">
+      <view class="weui-tab">
+        <view class="weui-navbar">
+          <block wx:for="{{tabs}}" wx:key="*this">
+            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" @tap="tabClick">
+              <view class="weui-navbar__title">{{item}}</view>
+            </view>
+          </block>
+          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+        </view>
+        <view class="weui-tab__panel">
+          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">选项一的内容</view>
+          <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+            <view class="weui-flex weui-tab__block">
+              <view class="weui-flex__item">
+                <view class="placeholder">weui</view>
+                <text>小学一年及语文上册</text>
+              </view>
+              <view class="weui-flex__item">
+                <view class="placeholder">weui</view>
+                <text>小学一年及语文上册</text>
+              </view>
+            </view>
+            <view class="weui-tab__block">
+              
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import Counter from 'counter' // alias example
   export default class Lesson extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '课堂'
+    }
+    components = {
+      counter1: Counter
     }
     data = {
-
+      imgs_array: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+      tabs: ["选项一", "选项二"],
+      activeIndex: 1,
+      sliderOffset: 0,
+      sliderLeft: 0
+    }
+    onLoad() {
+      var that = this;
+      var sliderWidth = 96;
+      wx.getSystemInfo({
+        success: function(res) {
+          console.log(res)
+          console.log(that)
+          that.sliderLeft = (res.windowWidth / that.data.tabs.length - sliderWidth) / 2
+          that.sliderOffset = res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          console.log(that.sliderLeft)
+          console.log(that.sliderOffset)
+        }
+      });
     }
     methods = {
-      
+      tabClick(e) {
+        this.sliderOffset = e.currentTarget.offsetLeft
+        this.activeIndex = e.currentTarget.id
+        console.log(this.sliderOffset)
+        console.log(this.activeIndex)
+      }
     }
   }
 </script>
